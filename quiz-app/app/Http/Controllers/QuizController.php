@@ -12,7 +12,7 @@ class QuizController extends Controller
         ['id' => 1, 'title' => 'PHP Basics', 'description' => 'Test your PHP knowledge'],
         ['id' => 2, 'title' => 'Laravel 101', 'description' => 'Intro to framework'],
     ];
-        return view('quizzes.index');
+        return view('quizzes.index', compact('quizzes'));
     }
 
     public function show($id) {
@@ -24,6 +24,6 @@ class QuizController extends Controller
             ['id' => 2, 'text' => 'Is Laravel a PHP framework?', 'options' => ['Yes', 'No']]
         ]
     ];
-        return view('quizzes.show', ['id' => $id]);
+        return view('quizzes.show', compact('quiz'), ['id' => $id]);
     }
 }
