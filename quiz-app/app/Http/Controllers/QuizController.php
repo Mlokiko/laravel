@@ -36,7 +36,24 @@ class QuizController extends Controller
                 $score++;
             }
         }
-        
+
         return "You scored $score out of $totalQuestions!";
+    }
+
+    public function create()
+    {
+        return view('admin.create');
+    }
+
+    public function storeQuiz(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+        ]);
+
+        $quiz = Quiz::create($validated);
+
+        return redirect()->route('home');
     }
 }
