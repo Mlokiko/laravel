@@ -18,8 +18,18 @@
             <div class="bg-white p-6 rounded shadow">
                 <h2 class="text-xl font-bold">{{ $quiz['title'] }}</h2>
                 <p class="text-gray-600">{{ $quiz['description'] }}</p>
-                <a href="{{ route('quiz.show', $quiz['id']) }}" class="text-blue-500 hover:underline mt-2 block">Start Quiz &rarr;</a>
+                <div class="mt-4 flex gap-3">
+    <a href="{{ route('quiz.show', $quiz->id) }}" class="text-blue-600 font-bold hover:underline">
+        Start Quiz &rarr;
+    </a>
+    
+    <a href="{{ route('questions.create', $quiz->id) }}" class="text-gray-500 hover:text-gray-800 text-sm border-l pl-3">
+        Manage Questions
+    </a>
+</div>
             </div>
+    
+            
         @endforeach
     </div>
 </body>
