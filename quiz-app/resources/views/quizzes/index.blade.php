@@ -9,9 +9,31 @@
 <body class="p-10 bg-gray-100">
 <div class="flex justify-between items-center mb-6">
     <h1 class="text-3xl font-bold">Available Quizzes</h1>
-    <a href="{{ route('quizzes.create') }}" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
-        + Create New Quiz
-    </a>
+
+    <div class="flex gap-4 items-center">
+        @auth
+            <span class="text-gray-600 font-medium hidden sm:block">
+                Hello, {{ Auth::user()->name }}
+            </span>
+            
+            <a href="{{ route('quizzes.create') }}" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 font-bold text-sm">
+                + New Quiz
+            </a>
+            
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 font-bold text-sm">
+                    Logout
+                </button>
+            </form>
+        @endauth
+
+        @guest
+            <a href="{{ route('login') }}" class="text-blue-600 hover:underline font-bold">
+                Log in to Admin
+            </a>
+        @endguest
+    </div>
 </div>
     <div class="grid gap-4">
         @foreach($quizzes as $quiz)
@@ -22,10 +44,11 @@
     <a href="{{ route('quiz.show', $quiz->id) }}" class="text-blue-600 font-bold hover:underline">
         Start Quiz &rarr;
     </a>
-    
+    @auth
     <a href="{{ route('questions.create', $quiz->id) }}" class="text-gray-500 hover:text-gray-800 text-sm border-l pl-3">
         Manage Questions
     </a>
+    @endauth
 </div>
             </div>
     
